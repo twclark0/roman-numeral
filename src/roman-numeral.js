@@ -1,4 +1,9 @@
 module.exports = val => {
+  // First make sure val is a valid number
+  if (!val || typeof val !== 'number' || isNaN(val)) {
+    return 'Please use a valid number'
+  }
+
   // key shows base Roman numerals and it's negation options
   const romanKey = {
     M: 1000,

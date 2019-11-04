@@ -59,3 +59,27 @@ describe('Duplicating values', () => {
     expect(romannumeralScript(2000)).toBe('MM')
   })
 })
+
+describe('Error case ', () => {
+  it('if value passed is zero', () => {
+    expect(romannumeralScript(0)).toBe('Please use a valid number')
+  })
+  it('if value passed is a string', () => {
+    expect(romannumeralScript('test')).toBe('Please use a valid number')
+  })
+  it('if value passed is a boolean', () => {
+    expect(romannumeralScript(false)).toBe('Please use a valid number')
+  })
+  it('if value passed is undefined', () => {
+    expect(romannumeralScript(undefined)).toBe('Please use a valid number')
+  })
+  it('if value passed is NaN', () => {
+    expect(romannumeralScript(NaN)).toBe('Please use a valid number')
+  })
+  it('if value passed is null', () => {
+    expect(romannumeralScript(null)).toBe('Please use a valid number')
+  })
+  it('if value passed is an object', () => {
+    expect(romannumeralScript({})).toBe('Please use a valid number')
+  })
+})
