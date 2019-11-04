@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import './App.css'
 
 function App() {
+  const [text, updateText] = useState('')
+  const [answer, updateAnswer] = useState('')
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    const { romannumeral } = await (await fetch(
+      `/romannumeral?query=${text}`
+    )).json()
+    updateAnswer(romannumeral)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <form onSubmit={e => handleSubmit(e)}>
+        <input
+          value={text}
+          type="text"
+          onChange={e => {
+            updateText(e.currentTarget.value)
+          }}></input>
+        <input type="submit" value="Calculate" />
+      </form>
+      <h3>{answer}</h3>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
